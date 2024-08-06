@@ -19,6 +19,7 @@ class Answer extends Model
         'score',
         'best_answer',
         'status',
+        'status_note',
     ];
 
     public function user(): BelongsTo

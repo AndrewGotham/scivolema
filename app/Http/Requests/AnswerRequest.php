@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\AnswerStatus;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class AnswerRequest extends FormRequest
 {
@@ -12,8 +14,10 @@ class AnswerRequest extends FormRequest
             'user_id' => ['required', 'integer'],
             'question_id' => ['required', 'integer'],
             'body' => ['required'],
-            'score' => ['required', 'integer'],
-            'best_answer' => ['boolean'],
+            'score' => ['nullable', 'integer'],
+            'best_answer' => ['nullable', 'boolean'],
+            'status' => ['nullable', Rule::enum(AnswerStatus::class)],
+            'status_note' => ['nullable', 'string'],
         ];
     }
 

@@ -23,6 +23,7 @@ class Question extends Model
         'user_id',
         'language_id',
         'status',
+        'status_note',
     ];
 
     protected $casts = [

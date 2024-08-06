@@ -19,7 +19,8 @@ return new class extends Migration {
             $table->unsignedMediumInteger('views')->default(0);
             $table->mediumInteger('score')->default(0);
             $table->json('tags')->nullable();
-            $table->engine('status', ['Published','Pending','Rejected']);
+            $table->enum('status', ['published','pending','rejected'])->default('published');
+            $table->text('status_note')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

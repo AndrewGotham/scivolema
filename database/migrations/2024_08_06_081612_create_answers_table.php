@@ -14,7 +14,8 @@ return new class extends Migration {
             $table->longText('body');
             $table->mediumInteger('score');
             $table->boolean('best_answer');
-            $table->engine('status', ['Published','Pending','Rejected']);
+            $table->enum('status', ['published','pending','rejected'])->default('published');
+            $table->text('status_note')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
