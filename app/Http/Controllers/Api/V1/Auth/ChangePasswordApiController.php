@@ -28,9 +28,5 @@ class ChangePasswordApiController extends Controller
                 'success' => 'Your password has been changed successfully.',
             ]);
         }
-
-        return response()->json([
-            'error' => 'No luck :(',
-        ]);
     }
 }

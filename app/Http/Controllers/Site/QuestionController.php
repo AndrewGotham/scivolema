@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\QuestionApiRequest;
+use App\Http\Requests\Api\V1\QuestionApiRequest;
 use App\Http\Resources\QuestionResource;
 use App\Models\Question;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;

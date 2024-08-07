@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LanguageApiRequest;
+use App\Http\Requests\Api\V1\LanguageApiRequest;
 use App\Http\Resources\LanguageResource;
 use App\Models\Language;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;

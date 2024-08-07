@@ -26,7 +26,7 @@ class UpdateUserApiController extends Controller
                 }
                 $file = $request->file('avatar');
 //                'storage/users/'. $user->id .'/images/'. $file->getClientOriginalName();
-                $request->user()->avatar = 'storage/users/'. $user->id .'/images/'. $this->saveAvatar($file, $user);
+                $request->user()->avatar = 'storage/users/'. $request->user()->id .'/images/'. $this->saveAvatar($file, $user);
             }
             $request->user()->update($request->validated());
             return UserResource::make($request->user())->additional([

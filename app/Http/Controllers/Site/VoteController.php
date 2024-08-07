@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\VoteApiRequest;
+use App\Http\Requests\Api\V1\VoteApiRequest;
 use App\Http\Resources\VoteResource;
 use App\Models\Vote;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;

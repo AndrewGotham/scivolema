@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AnswerApiRequest;
+use App\Http\Requests\Api\V1\AnswerApiRequest;
 use App\Http\Resources\AnswerResource;
 use App\Models\Answer;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
