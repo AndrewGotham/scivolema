@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Site;
 
-use App\Http\Requests\QuestionRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\QuestionApiRequest;
 use App\Http\Resources\QuestionResource;
 use App\Models\Question;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -18,7 +19,7 @@ class QuestionController extends Controller
         return QuestionResource::collection(Question::all());
     }
 
-    public function store(QuestionRequest $request)
+    public function store(QuestionApiRequest $request)
     {
         $this->authorize('create', Question::class);
 
@@ -32,7 +33,7 @@ class QuestionController extends Controller
         return new QuestionResource($question);
     }
 
-    public function update(QuestionRequest $request, Question $question)
+    public function update(QuestionApiRequest $request, Question $question)
     {
         $this->authorize('update', $question);
 

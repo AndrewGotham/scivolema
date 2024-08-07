@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Site;
 
-use App\Http\Requests\LanguageRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\LanguageApiRequest;
 use App\Http\Resources\LanguageResource;
 use App\Models\Language;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -18,7 +19,7 @@ class LanguageController extends Controller
         return LanguageResource::collection(Language::all());
     }
 
-    public function store(LanguageRequest $request)
+    public function store(LanguageApiRequest $request)
     {
         $this->authorize('create', Language::class);
 
@@ -32,7 +33,7 @@ class LanguageController extends Controller
         return new LanguageResource($languages);
     }
 
-    public function update(LanguageRequest $request, Language $languages)
+    public function update(LanguageApiRequest $request, Language $languages)
     {
         $this->authorize('update', $languages);
 

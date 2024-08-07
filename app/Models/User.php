@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -67,6 +68,6 @@ class User extends Authenticatable
             return asset($this->avatar);
         }
 
-        return 'https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_1280.png';
+        return asset('assets/images/user-2935527_1280.webp');
     }
 }

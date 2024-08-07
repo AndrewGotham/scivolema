@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Site;
 
-use App\Http\Requests\VoteRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\VoteApiRequest;
 use App\Http\Resources\VoteResource;
 use App\Models\Vote;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -18,7 +19,7 @@ class VoteController extends Controller
         return VoteResource::collection(Vote::all());
     }
 
-    public function store(VoteRequest $request)
+    public function store(VoteApiRequest $request)
     {
         $this->authorize('create', Vote::class);
 
@@ -32,7 +33,7 @@ class VoteController extends Controller
         return new VoteResource($vote);
     }
 
-    public function update(VoteRequest $request, Vote $vote)
+    public function update(VoteApiRequest $request, Vote $vote)
     {
         $this->authorize('update', $vote);
 
