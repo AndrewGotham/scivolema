@@ -6,18 +6,18 @@ use App\Enums\QuestionStatus;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class QuestionApiRequest extends FormRequest
+class StoreQuestionApiRequest extends FormRequest
 {
     public function rules(): array
     {
         return [
-            'title' => ['required'],
-            'slug' => ['required'],
+            'title' => ['required', 'string', 'max:255'],
+//            'slug' => ['required'],
             'body' => ['required'],
-            'views' => ['required', 'integer'],
-            'score' => ['required', 'integer'],
-            'user_id' => ['required', 'integer'],
-            'language_id' => ['required', 'integer'],
+//            'views' => ['required', 'integer'],
+//            'score' => ['required', 'integer'],
+//            'user_id' => ['required', 'integer'],
+//            'language_id' => ['required', 'integer'],
             'status' => ['nullable', Rule::enum(QuestionStatus::class)],
             'status_note' => ['nullable', 'string'],
         ];

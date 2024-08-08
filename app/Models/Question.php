@@ -7,11 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Question extends Model
 {
-    use SoftDeletes, HasFactory;
+    use SoftDeletes;
+    use HasFactory;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($question) {
+            $question->votes->map->delete();
+        });
+    }
 
     protected $fillable = [
         'title',

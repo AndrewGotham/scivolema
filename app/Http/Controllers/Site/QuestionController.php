@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\QuestionApiRequest;
+use App\Http\Requests\Api\V1\StoreQuestionApiRequest;
+use App\Http\Requests\Api\V1\UpdateQuestionApiRequest;
 use App\Http\Resources\QuestionResource;
+use App\Http\Resources\UserResource;
 use App\Models\Question;
+use App\Models\Vote;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
@@ -19,7 +24,7 @@ class QuestionController extends Controller
         return QuestionResource::collection(Question::all());
     }
 
-    public function store(QuestionApiRequest $request)
+    public function store(StoreQuestionApiRequest $request)
     {
         $this->authorize('create', Question::class);
 
@@ -33,21 +38,27 @@ class QuestionController extends Controller
         return new QuestionResource($question);
     }
 
-    public function update(QuestionApiRequest $request, Question $question)
+    public function update(UpdateQuestionApiRequest $request, Question $question)
     {
         $this->authorize('update', $question);
 
         $question->update($request->validated());
 
-        return new QuestionResource($question);
+        return QuestionResource::make($question)->additional([
+            'user' => UserResource::make($request->user()),
+            'message' => 'Question updated successfully.'
+        ]);
     }
 
-    public function destroy(Question $question)
+    public function destroy(Question $question, Request $request)
     {
         $this->authorize('delete', $question);
 
         $question->delete();
 
-        return response()->json();
+        return response()->json([
+            'user' => UserResource::make($request->user()),
+            'message' => 'Question deleted successfully.'
+        ]);
     }
 }

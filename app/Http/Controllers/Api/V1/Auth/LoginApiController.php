@@ -17,9 +17,12 @@ class LoginApiController
             $user = User::where('email', $request->email)->first();
             if(!$user || !Hash::check($request->password, $user->password))
             {
-                throw ValidationException::withMessages(
-                    'email or password is incorrect',
-                );
+//                throw ValidationException::withMessages(
+//                    'email or password is incorrect',
+//                );
+                return request()->json([
+                    'error' => 'Unauthorized'
+                ], 401);
             } else {
                 return UserResource::make($user)->additional([
                     'access_token' => $user->createToken('user')->plainTextToken,

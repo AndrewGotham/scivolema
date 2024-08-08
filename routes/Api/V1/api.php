@@ -10,24 +10,5 @@ use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-
-// Auth routes
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user', function (Request $request) {
-        return UserResource::make($request->user());
-    });
-
-    Route::delete('/user/{user}', [UserApiController::class, 'destroy']);
-    Route::put('/user', UpdateUserApiController::class);
-    Route::post('/user/logout', LogoutApiController::class);
-    Route::put('/user/update/password', ChangePasswordApiController::class);
-
-    Route::get('/user', [UserApiController::class, 'self']);
-    Route::get('/users/{user}', [UserApiController::class, 'show']);
-    Route::get('/users', [UserApiController::class, 'index']);
-});
-
-// Guest routes
-Route::post('/login', LoginApiController::class);
-Route::post('/user', RegistrationController::class);
-Route::post('/user/logout', LogoutApiController::class);
+require __DIR__ . '/user/api.php';
+require __DIR__ . '/question/api.php';
