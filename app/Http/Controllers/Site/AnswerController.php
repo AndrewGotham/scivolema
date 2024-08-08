@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\AnswerApiRequest;
+use App\Http\Requests\Api\V1\UpdateAnswerApiRequest;
 use App\Http\Resources\AnswerResource;
 use App\Models\Answer;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -19,7 +19,7 @@ class AnswerController extends Controller
         return AnswerResource::collection(Answer::all());
     }
 
-    public function store(AnswerApiRequest $request)
+    public function store(UpdateAnswerApiRequest $request)
     {
         $this->authorize('create', Answer::class);
 
@@ -33,7 +33,7 @@ class AnswerController extends Controller
         return new AnswerResource($answer);
     }
 
-    public function update(AnswerApiRequest $request, Answer $answer)
+    public function update(UpdateAnswerApiRequest $request, Answer $answer)
     {
         $this->authorize('update', $answer);
 

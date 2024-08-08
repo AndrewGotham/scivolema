@@ -14,8 +14,8 @@ return new class extends Migration {
             $table->foreignIdFor(User::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignIdFor(Question::class)->constrained()->cascadeOnDelete();
             $table->longText('body');
-            $table->mediumInteger('score');
-            $table->boolean('best_answer');
+            $table->mediumInteger('score')->default(0);
+            $table->boolean('best_answer')->default(false);
             $table->enum('status', ['published','pending','rejected'])->default('published');
             $table->text('status_note')->nullable();
             $table->softDeletes();

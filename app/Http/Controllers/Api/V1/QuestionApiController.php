@@ -14,7 +14,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class QuestionApiController extends Controller
+class QuestionApiController
 {
     use AuthorizesRequests;
 
@@ -131,20 +131,23 @@ class QuestionApiController extends Controller
             }
         )->where('user_id', $request->user()->id)->first();
 
-        if(isset($vote->upvote) && $vote->upvote == true)
+        if(isset($vote->upvote))
         {
-            return response()->json([
-                'error' => 'You have already voted for this question.',
-            ]);
-        }
+            if($vote->upvote == true)
+            {
+                return response()->json([
+                    'error' => 'You have already voted for this question.',
+                ]);
+            }
 
-        if(isset($vote->upvote) && $vote->upvote == false)
-        {
-            $question->increment('score');
-            $vote->delete();
-            return response()->json([
-                'error' => 'You have withdrawn your score successfully.',
-            ]);
+            if($vote->upvote == false)
+            {
+                $question->increment('score');
+                $vote->delete();
+                return response()->json([
+                    'error' => 'You have withdrawn your score successfully.',
+                ]);
+            }
         }
 
         $question->increment('score');
@@ -169,20 +172,23 @@ class QuestionApiController extends Controller
             }
         )->where('user_id', $request->user()->id)->first();
 
-        if(isset($vote->upvote) && $vote->upvote == false)
+        if(isset($vote->upvote))
         {
-            return response()->json([
-                'error' => 'You have already given a negative score to this question.',
-            ]);
-        }
+            if($vote->upvote == false)
+            {
+                return response()->json([
+                    'error' => 'You have already given a negative score to this question.',
+                ]);
+            }
 
-        if(isset($vote->upvote) && $vote->upvote == true)
-        {
-            $question->decrement('score');
-            $vote->delete();
-            return response()->json([
-                'error' => 'You have withdrawn your positive score from this question successfully.',
-            ]);
+            if($vote->upvote == true)
+            {
+                $question->decrement('score');
+                $vote->delete();
+                return response()->json([
+                    'error' => 'You have withdrawn your positive score from this question successfully.',
+                ]);
+            }
         }
 
         $question->decrement('score');
