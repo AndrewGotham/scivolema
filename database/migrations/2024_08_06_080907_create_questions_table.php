@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->json('tags')->nullable();
             $table->enum('status', ['published','pending','rejected'])->default('published');
             $table->text('status_note')->nullable();
+	    $table->index('slug');
             $table->softDeletes();
             $table->timestamps();
         });

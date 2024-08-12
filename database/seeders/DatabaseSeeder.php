@@ -21,8 +21,10 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@admin.com',
         ]);
+        $this->call(PermissionsSeeder::class);
         User::factory(10)->create();
         $this->call(QuestionSeeder::class);
         $this->call(AnswerSeeder::class);
+        $this->call(VoteSeeder::class);
     }
 }

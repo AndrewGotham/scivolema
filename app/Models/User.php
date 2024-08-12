@@ -2,16 +2,24 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Laravel\Sanctum\HasApiTokens;
+use App\Models\Scopes\Searchable;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasRoles;
+    use Notifiable;
+    use HasFactory;
+    use Searchable;
+    use SoftDeletes;
+    use HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -23,16 +31,15 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'slug',
         'avatar',
         'status',
         'status_note',
+        'language_id',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
+    protected $searchableFields = ['*'];
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -49,6 +56,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function language()
+    {
+        return $this->belongsTo(Language::class);
     }
 
     public function answers(): HasMany
@@ -69,5 +81,15 @@ class User extends Authenticatable
         }
 
         return asset('assets/images/user-2935527_1280.webp');
+    }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class);
+    }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->hasRole('super-admin');
     }
 }

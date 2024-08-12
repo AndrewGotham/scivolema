@@ -13,10 +13,16 @@ class VoteFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => \App\Models\User::factory(),
+            'votable_type' => $this->faker->randomElement([
+                \App\Models\Question::class,
+                \App\Models\Answer::class,
+            ]),
+            'votable_id' => function (array $item) {
+                return app($item['votable_type'])->factory();
+            },
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-            'votable' => $this->faker->word(),
-            'user_id' => $this->faker->randomNumber(),
         ];
     }
 }

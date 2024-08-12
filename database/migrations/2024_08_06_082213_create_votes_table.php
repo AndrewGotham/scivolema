@@ -13,7 +13,9 @@ return new class extends Migration {
             $table->foreignIdFor(User::class)->nullable()->constrained()->nullOnDelete();
             $table->morphs('votable');
             $table->boolean('upvote')->default(true);
-//            $table->timestamps();
+//	        $table->index('votable_id');
+//            $table->index('votable_type');
+            $table->timestamps();
         });
     }
 

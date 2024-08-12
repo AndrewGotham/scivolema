@@ -19,7 +19,7 @@ class AnswerFactory extends Factory
             'user_id' => User::inRandomOrder()->first(),
             'question_id' => Question::inRandomOrder()->first() ?: $this->faker->randomNumber(),
 //            'question_id' => Question::inRandomOrder()->first(),
-            'body' => $this->faker->paragraphs(3, true),
+            'body' => $this->faker->text(),
             'score' => $this->faker->randomNumber(),
             'best_answer' => $this->faker->boolean(),
             'status' => $this->faker->randomElement(AnswerStatus::cases()),

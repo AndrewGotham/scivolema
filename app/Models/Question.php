@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\Searchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Question extends Model
 {
     use SoftDeletes;
+    use Searchable;
     use HasFactory;
 
     protected static function boot()
@@ -35,6 +37,8 @@ class Question extends Model
         'status',
         'status_note',
     ];
+
+    protected $searchableFields = ['*'];
 
     protected $casts = [
         'tags' => 'array',

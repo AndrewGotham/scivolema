@@ -29,5 +29,5 @@ Route::middleware('auth:sanctum')->group(function () {
 
 // Guest routes
 Route::post('/login', LoginApiController::class);
-Route::post('/user', RegistrationController::class);
+Route::post('/register', RegistrationController::class);
 Route::post('/user/logout', LogoutApiController::class);
