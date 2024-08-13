@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AnswerController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\PermissionController;
@@ -13,6 +14,10 @@ use App\Http\Controllers\Api\V1\QuestionAnswersController;
 use App\Http\Controllers\Api\V1\UserAnswersController;
 use App\Http\Controllers\Api\V1\UserQuestionsController;
 use App\Http\Controllers\Api\V1\UserVotesController;
+
+Route::middleware(['auth:sanctum'])
+    ->get('/', [AdminController::class, 'index'])
+    ->name('admin');
 
 Route::middleware('auth:sanctum')
     ->get('/user', function (Request $request) {

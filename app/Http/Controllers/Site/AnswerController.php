@@ -14,9 +14,9 @@ class AnswerController extends Controller
 
     public function index()
     {
-        $this->authorize('viewAny', Answer::class);
+        $answers = Answer::all();
 
-        return AnswerResource::collection(Answer::all());
+        return view('site.answer.index', compact('answers'));
     }
 
     public function store(UpdateAnswerApiRequest $request)

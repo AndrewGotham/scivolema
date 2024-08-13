@@ -19,9 +19,9 @@ class QuestionController extends Controller
 
     public function index()
     {
-        $this->authorize('viewAny', Question::class);
+        $questions = Question::paginate();
 
-        return QuestionResource::collection(Question::all());
+        return view('site.question.index', compact('questions'));
     }
 
     public function store(StoreQuestionApiRequest $request)
