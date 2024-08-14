@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-      dir="{{ \App\Models\Language::where('code', app()->getLocale())->first()->dir }}" class="__variable_be477b __variable_aaf875">
+      dir="{{ \App\Models\Language::where('code', app()->getLocale())->first()->dir }}" class="__variable_be477b __variable_aaf875"
+      x-data="{currentTheme: localStorage.getItem('theme') || localStorage.setItem('theme', 'system')}"
+      x-init="$watch('currentTheme', val => localStorage.setItem('theme', val))"
+      x-bind:class="{'dark': currentTheme === 'dark' || (currentTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)}">
 <head>
     <meta charset="utf-8">
 {{--    <link rel="preload" as="font" href="{{ asset('assets/site/fonts/c9a5bc6a7c948fb0-s.p.woff2') }}" crossorigin=""--}}
@@ -8,6 +11,9 @@
 {{--    <link rel="preload" as="font" href="{{ asset('assets/site/fonts/c9a5bc6a7c948fb0-s.p.woff2') }}" crossorigin=""--}}
 {{--          type="font/woff2">--}}
     <title>Scivolema</title>
+    <link rel="icon" href="{{ asset('assets/images/scivolema.png') }}">
+    <meta http-equiv="Icon" content="{{ asset('assets/images/scivolema.png') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/scivolema.png') }}" sizes="32x32">
     <meta name="description"
           content="Iuj ajn demandoj kaj respondoj">
     <link rel="author" href="{{ env('APP_URL') }}">
@@ -50,8 +56,28 @@
 
     @livewireStyles
     @stack('styles')
+{{--    <script>--}}
+{{--        // detect-mode.js--}}
+{{--        // set initial color scheme--}}
+
+{{--        let explicitelyPreferScheme = false--}}
+{{--        if (window.localStorage) {--}}
+{{--            if (localStorage.getItem('colorMode') === 'dark') {--}}
+{{--                document.documentElement.classList.add('dark')--}}
+{{--                explicitelyPreferScheme = 'dark'--}}
+{{--            } else if (localStorage.getItem('colorMode') === 'light') {--}}
+{{--                document.documentElement.classList.remove('dark')--}}
+{{--                explicitelyPreferScheme = 'light'--}}
+{{--            }--}}
+{{--        }--}}
+
+{{--        if (explicitelyPreferScheme !== 'light' && window.matchMedia('(prefers-color-scheme:dark)').matches) {--}}
+{{--            document.documentElement.classList.add('dark')--}}
+{{--        }--}}
+{{--    </script>--}}
 </head>
-<body x-cloak x-data="{darkMode: $persist(false)}" :class="{'dark': darkMode === true }" class="min-h-screen bg-gradient-to-b from-slate-100 to-white text-slate-900 antialiased dark:bg-gradient-to-b dark:from-gray-900 dark:to-gray-800 dark:text-slate-50 dark:hover:text-white">
+{{--<body x-cloak x-data="{darkMode: $persist(false)}" :class="{'dark': darkMode === true }" class="min-h-screen bg-gradient-to-b from-slate-100 to-white text-slate-900 antialiased dark:bg-gradient-to-b dark:from-gray-900 dark:to-gray-800 dark:text-slate-50 dark:hover:text-white">--}}
+<body class="min-h-screen bg-gradient-to-b from-slate-100 to-white text-slate-900 antialiased dark:bg-gradient-to-b dark:from-gray-900 dark:to-gray-800 dark:text-slate-50 dark:hover:text-white">
 <x-site.header />
 <main class="mt-20" id="main-content flex">
     <div class="pb-10 flex flex-col items-center">

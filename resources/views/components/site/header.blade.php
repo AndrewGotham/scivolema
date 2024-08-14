@@ -34,16 +34,26 @@
                     </div>
                 @endguest
                 @auth
+                    {{-- Admin Dashboard | Check if Admin!!! --}}
                     <div
                         class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 max-w-full border-accent-foreground bg-transparent text-primary backdrop-blur-md transition-colors duration-150 hover:bg-accent-foreground hover:text-white">
-{{--                        <div--}}
-{{--                            class="mr-1 flex aspect-square h-[14px] w-[14px] animate-pulse rounded-full bg-green-500/50 dark:bg-green-400/50 sm:m-0 md:mr-1"--}}
-{{--                            aria-hidden="true">--}}
-{{--                            <div class="m-auto h-2 w-2 rounded-full bg-green-500 dark:bg-green-400"></div>--}}
-{{--                        </div>--}}
                         <a href="{{ route('admin') }}">
                             <span class="inline whitespace-nowrap sm:hidden md:inline">{{ __('Admin Dashboard') }}</span>
                         </a>
+                    </div>
+
+                    {{-- Lougout --}}
+                    <div
+                        class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 max-w-full border-accent-foreground bg-transparent text-primary backdrop-blur-md transition-colors duration-150 hover:bg-accent-foreground hover:text-white">
+                        <div
+                            class="mr-1 flex aspect-square h-[14px] w-[14px] animate-pulse rounded-full bg-green-500/50 dark:bg-green-400/50 sm:m-0 md:mr-1"
+                            aria-hidden="true">
+                            <div class="m-auto h-2 w-2 rounded-full bg-green-500 dark:bg-green-400"></div>
+                        </div>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <span class="inline whitespace-nowrap sm:hidden md:inline" onclick="event.preventDefault(); this.closest('form').submit();">{{ __('Log Out') }}</span>
+                        </form>
                     </div>
                 @endauth
             </div>
@@ -110,7 +120,7 @@
                     <x-site.language-switch />
                 </div>
 
-            <x-site.mode-toggle />
+                <x-site.mode-toggle />
             </div>
         </div>
     </div>
