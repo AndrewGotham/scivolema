@@ -3,51 +3,21 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\LanguageApiRequest;
-use App\Http\Resources\LanguageResource;
-use App\Models\Language;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
 
 class LanguageController extends Controller
 {
-    use AuthorizesRequests;
-
-    public function index()
+    public function __invoke(Request $request)
     {
-        $this->authorize('viewAny', Language::class);
+        // Get language from the form
+        $locale = $request->input('locale');
 
-        return LanguageResource::collection(Language::all());
-    }
+        // Set current locale
+        app()->setLocale($locale);
 
-    public function store(LanguageApiRequest $request)
-    {
-        $this->authorize('create', Language::class);
+        // Store language into the session
+        session()->put('locale', $locale);
 
-        return new LanguageResource(Language::create($request->validated()));
-    }
-
-    public function show(Language $languages)
-    {
-        $this->authorize('view', $languages);
-
-        return new LanguageResource($languages);
-    }
-
-    public function update(LanguageApiRequest $request, Language $languages)
-    {
-        $this->authorize('update', $languages);
-
-        $languages->update($request->validated());
-
-        return new LanguageResource($languages);
-    }
-
-    public function destroy(Language $languages)
-    {
-        $this->authorize('delete', $languages);
-
-        $languages->delete();
-
-        return response()->json();
+        return redirect()->back();
     }
 }

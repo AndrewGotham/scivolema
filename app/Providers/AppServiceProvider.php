@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Language;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,5 +26,11 @@ class AppServiceProvider extends ServiceProvider
         Gate::before(function ($user, $ability) {
             return $user->hasRole('Super Admin') ? true : null;
         });
+
+        view()->composer('*', function ($view) {
+            $view->with('languages',
+                Language::whereActive(true)->whereAvailable(true)->get());
+        });
+//        view()->share('languages', Language::class::where(['active'=>true,'available'=>true])->get());
     }
 }

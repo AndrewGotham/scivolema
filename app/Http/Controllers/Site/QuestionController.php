@@ -33,9 +33,7 @@ class QuestionController extends Controller
 
     public function show(Question $question)
     {
-        $this->authorize('view', $question);
-
-        return new QuestionResource($question);
+        return view('site.question.show', compact('question'));
     }
 
     public function update(UpdateQuestionApiRequest $request, Question $question)

@@ -1,6 +1,6 @@
+{{--<x-site-layout :data=$data>--}}
 <x-site.layout>
     <x-site.hero />
-
 
         <section class="flex content-center">
         <div class="container mt-12 max-w-6xl">
@@ -237,3 +237,4 @@
         </div>
     </section>
 </x-site.layout>
+{{--</x-site-layout>--}}

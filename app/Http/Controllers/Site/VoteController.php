@@ -14,9 +14,9 @@ class VoteController extends Controller
 
     public function index()
     {
-        $this->authorize('viewAny', Vote::class);
+        $votes = Vote::all();
 
-        return VoteResource::collection(Vote::all());
+        return view('site.vote.index', compact('votes'));
     }
 
     public function store(VoteApiRequest $request)
@@ -28,9 +28,7 @@ class VoteController extends Controller
 
     public function show(Vote $vote)
     {
-        $this->authorize('view', $vote);
-
-        return new VoteResource($vote);
+        return view('site.vote.show', compact('vote'));
     }
 
     public function update(VoteApiRequest $request, Vote $vote)

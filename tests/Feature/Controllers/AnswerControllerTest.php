@@ -41,7 +41,7 @@ class AnswerControllerTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertViewIs('app.answers.index')
+            ->assertViewIs('site.answer.index')
             ->assertViewHas('answers');
     }
 
@@ -52,7 +52,7 @@ class AnswerControllerTest extends TestCase
     {
         $response = $this->get(route('answers.create'));
 
-        $response->assertOk()->assertViewIs('app.answers.create');
+        $response->assertOk()->assertViewIs('site.answer.create');
     }
 
     /**
@@ -70,7 +70,7 @@ class AnswerControllerTest extends TestCase
 
         $answer = Answer::latest('id')->first();
 
-        $response->assertRedirect(route('answers.edit', $answer));
+        $response->assertRedirect(route('site.answer.edit', $answer));
     }
 
     /**
@@ -84,7 +84,7 @@ class AnswerControllerTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertViewIs('app.answers.show')
+            ->assertViewIs('site.answer.show')
             ->assertViewHas('answer');
     }
 
@@ -99,7 +99,7 @@ class AnswerControllerTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertViewIs('app.answers.edit')
+            ->assertViewIs('site.answer.edit')
             ->assertViewHas('answer');
     }
 

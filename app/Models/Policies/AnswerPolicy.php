@@ -39,7 +39,7 @@ class AnswerPolicy
      */
     public function update(User $user, Answer $model): bool
     {
-        return $user->id === $answer->user_id || $user->hasPermissionTo('update answers');
+        return $user->id === $model->user_id || $user->hasPermissionTo('update answers');
     }
 
     /**
@@ -47,7 +47,7 @@ class AnswerPolicy
      */
     public function delete(User $user, Answer $model): bool
     {
-        return $user->id === $answer->user_id || $user->hasPermissionTo('delete answers');
+        return $user->id === $model->user_id || $user->hasPermissionTo('delete answers');
     }
 
     /**
@@ -55,7 +55,7 @@ class AnswerPolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->id === $answer->question->user_id || $user->hasPermissionTo('delete answers');
+        return $user->hasPermissionTo('delete answers');
     }
 
     /**

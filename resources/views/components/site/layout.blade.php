@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en" class="__variable_be477b __variable_aaf875">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+      dir="{{ \App\Models\Language::where('code', app()->getLocale())->first()->dir }}" class="__variable_be477b __variable_aaf875">
 <head>
     <meta charset="utf-8">
 {{--    <link rel="preload" as="font" href="{{ asset('assets/site/fonts/c9a5bc6a7c948fb0-s.p.woff2') }}" crossorigin=""--}}

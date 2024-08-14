@@ -39,7 +39,7 @@ class LanguageControllerTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertViewIs('app.languages.index')
+            ->assertViewIs('admin.language.index')
             ->assertViewHas('languages');
     }
 
@@ -50,7 +50,7 @@ class LanguageControllerTest extends TestCase
     {
         $response = $this->get(route('languages.create'));
 
-        $response->assertOk()->assertViewIs('app.languages.create');
+        $response->assertOk()->assertViewIs('admin.language.create');
     }
 
     /**
@@ -82,7 +82,7 @@ class LanguageControllerTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertViewIs('app.languages.show')
+            ->assertViewIs('admin.language.show')
             ->assertViewHas('language');
     }
 
@@ -97,7 +97,7 @@ class LanguageControllerTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertViewIs('app.languages.edit')
+            ->assertViewIs('admin.language.edit')
             ->assertViewHas('language');
     }
 

@@ -28,9 +28,7 @@ class AnswerController extends Controller
 
     public function show(Answer $answer)
     {
-        $this->authorize('view', $answer);
-
-        return new AnswerResource($answer);
+        return view('site.answer.show', compact('answer'));
     }
 
     public function update(UpdateAnswerApiRequest $request, Answer $answer)

@@ -18,7 +18,7 @@ class PermissionControllerTest extends TestCase
         parent::setUp();
 
         $this->actingAs(User::factory()->create(['email' => 'admin@admin.com']));
-        
+
         $this->seed(\Database\Seeders\PermissionsSeeder::class);
 
         $this->withoutExceptionHandling();
@@ -33,7 +33,7 @@ class PermissionControllerTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertViewIs('app.permissions.index')
+            ->assertViewIs('admin.permission.index')
             ->assertViewHas('permissions');
     }
 
@@ -44,7 +44,7 @@ class PermissionControllerTest extends TestCase
     {
         $response = $this->get(route('permissions.create'));
 
-        $response->assertOk()->assertViewIs('app.permissions.create');
+        $response->assertOk()->assertViewIs('admin.permission.create');
     }
 
     /**
@@ -75,7 +75,7 @@ class PermissionControllerTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertViewIs('app.permissions.show')
+            ->assertViewIs('admin.permission.show')
             ->assertViewHas('permission');
     }
 
@@ -90,7 +90,7 @@ class PermissionControllerTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertViewIs('app.permissions.edit')
+            ->assertViewIs('admin.permission.edit')
             ->assertViewHas('permission');
     }
 
@@ -126,7 +126,7 @@ class PermissionControllerTest extends TestCase
         $response = $this->delete(route('permissions.destroy', $permission));
 
         $response->assertRedirect(route('permissions.index'));
-        
+
         $this->assertModelMissing($permission);
     }
 }

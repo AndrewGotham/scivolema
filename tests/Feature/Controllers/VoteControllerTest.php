@@ -39,7 +39,7 @@ class VoteControllerTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertViewIs('app.votes.index')
+            ->assertViewIs('admin.vote.index')
             ->assertViewHas('votes');
     }
 
@@ -50,7 +50,7 @@ class VoteControllerTest extends TestCase
     {
         $response = $this->get(route('votes.create'));
 
-        $response->assertOk()->assertViewIs('app.votes.create');
+        $response->assertOk()->assertViewIs('admin.vote.create');
     }
 
     /**
@@ -82,7 +82,7 @@ class VoteControllerTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertViewIs('app.votes.show')
+            ->assertViewIs('admin.vote.show')
             ->assertViewHas('vote');
     }
 
@@ -97,7 +97,7 @@ class VoteControllerTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertViewIs('app.votes.edit')
+            ->assertViewIs('admin.vote.edit')
             ->assertViewHas('vote');
     }
 

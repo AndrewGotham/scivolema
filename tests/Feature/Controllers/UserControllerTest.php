@@ -40,7 +40,7 @@ class UserControllerTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertViewIs('app.users.index')
+            ->assertViewIs('admin.user.index')
             ->assertViewHas('users');
     }
 
@@ -51,7 +51,7 @@ class UserControllerTest extends TestCase
     {
         $response = $this->get(route('users.create'));
 
-        $response->assertOk()->assertViewIs('app.users.create');
+        $response->assertOk()->assertViewIs('admin.user.create');
     }
 
     /**
@@ -87,7 +87,7 @@ class UserControllerTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertViewIs('app.users.show')
+            ->assertViewIs('admin.user.show')
             ->assertViewHas('user');
     }
 
@@ -102,7 +102,7 @@ class UserControllerTest extends TestCase
 
         $response
             ->assertOk()
-            ->assertViewIs('app.users.edit')
+            ->assertViewIs('admin.user.edit')
             ->assertViewHas('user');
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Concerns\HasTags;
 use App\Models\Scopes\Searchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +16,7 @@ class Question extends Model
     use SoftDeletes;
     use Searchable;
     use HasFactory;
+    use HasTags;
 
     protected static function boot()
     {
