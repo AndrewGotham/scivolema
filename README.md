@@ -1,4 +1,4 @@
-## Blogmasters blogging platform
+## Scivolema Q&A Type Application
 
 Scivolema is a community questions and answer site of the StackOverflow type.
 
